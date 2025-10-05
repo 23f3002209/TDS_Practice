@@ -1,0 +1,14 @@
+main.yml
+name: Test Action
+
+on:
+  push:
+    branches:
+      - main  # or any branch you want to trigger the action
+
+jobs:
+  test:
+    steps:
+      - name: 23f3002209@ds.study.iitm.ac.in
+        run: echo "Hello, world!"
+      
