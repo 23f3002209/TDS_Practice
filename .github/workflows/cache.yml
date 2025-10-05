@@ -9,7 +9,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Prime cache 3fed9e3
+      - name: prime-cache-3fed9e3
         id: cache-step
         uses: actions/cache@v4
         with:
