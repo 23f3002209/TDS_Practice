@@ -1,0 +1,33 @@
+name: Daily Auto Commit
+
+on:
+  schedule:
+    # This is "cron" syntax. It means: minute 30, hour 8 (UTC), every day.
+    - cron: '30 8 * * *'
+  # This line is a secret weapon! It allows us to click a button to run it manually.
+  workflow_dispatch:
+
+jobs:
+  make-a-commit:
+    runs-on: ubuntu-latest
+    permissions:
+      # This gives our robot permission to save changes back to the repository
+      contents: write 
+
+    steps:
+      # 1. First, the robot needs to download your code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. We make a tiny change to a file so we have something to commit
+      - name: Update tracking file
+        run: echo "Automated run at $(date)" > daily_tracking.txt
+
+      # 3. We save (commit) the change. Notice your email is in the name!
+      - name: Commit changes for 23f3002209@ds.study.iitm.ac.in
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "23f3002209@ds.study.iitm.ac.in"
+          git add daily_tracking.txt
+          git commit -m "Automated daily activity commit"
+          git push
